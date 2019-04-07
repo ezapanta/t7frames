@@ -1,21 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const Characters = require('../../character_template');
+// const express = require('express');
+// const router = express.Router();
+// const Characters = require('../../character_template');
 
-// GETs all Characters
-router.get('/', (req, res) => {
-    res.json(Characters);
-    // express takes care of the stringify for you
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://<username>:<password>@t7frames-zvha5.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
+client.connect(err => {
+  // const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  if(err){
+      console.log(err)
+  }
+  console.log('connected')
+  client.close();
 });
-
-// GET one Character based on ID
-router.get('/:id', (req, res) => {
-    const found = Characters.some(Character => Character.id === parseInt(req.params.id))
-    if(found) {
-        res.json(Characters.filter(Character => Character.id === parseInt(req.params.id)));
-    } else {
-        res.status(400).json({ msg: `No character with id number ${req.params.id}` })
-    }
-});
-
-module.exports = router;
