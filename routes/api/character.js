@@ -3,7 +3,7 @@
 // const Characters = require('../../character_template');
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://<username>:<password>@t7frames-zvha5.mongodb.net/test?retryWrites=true";
+const uri = "mongodb+srv://t7:frames@t7frames-zvha5.mongodb.net/test?retryWrites=true";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 client.connect(err => {
